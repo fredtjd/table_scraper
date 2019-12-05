@@ -15,7 +15,6 @@ l_rwc="https://www.bbc.co.uk/sport/rugby-union/world-cup/table" #4 pools x 6
 l_champcup="https://www.bbc.co.uk/sport/rugby-union/european-cup/table" #5 pools x 4
 l_challengecup="https://www.bbc.co.uk/sport/rugby-union/european-challenge-cup/table" #5 pools x 4
 l_engchamp="https://www.bbc.co.uk/sport/rugby-union/the-english-championship/table"
-l_prod2=""
 
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 credentials = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
@@ -66,19 +65,17 @@ def league_rip(league):
         out_name = "english_championship"
     else:
         pass
-    if conf == 0:
+    for c in range(0,conf+1):
         rows = []
-        #rows.append(['Rank', 'Team', 'Played', 'Won', 'Lost', 'Drawn', 'PD', 'BP', 'Points'])
         for t in range(0,teams):
-            dict_t = {'data-reactid': id_class + ".2.0.0.0.0.$0.1.1.$row-" + str(t) + ".$td-1.0.0"}
-            dict_p = {'data-reactid': id_class + ".2.0.0.0.0.$0.1.1.$row-" + str(t) + ".$td-2.1"}
-            dict_w = {'data-reactid': id_class + ".2.0.0.0.0.$0.1.1.$row-" + str(t) + ".$td-3.1"}
-            dict_l = {'data-reactid': id_class + ".2.0.0.0.0.$0.1.1.$row-" + str(t) + ".$td-4.1"}
-            dict_d = {'data-reactid': id_class + ".2.0.0.0.0.$0.1.1.$row-" + str(t) + ".$td-5.1"}
-            dict_pd = {'data-reactid': id_class + ".2.0.0.0.0.$0.1.1.$row-" + str(t) + ".$td-8.1"}
-            dict_bp = {'data-reactid': id_class + ".2.0.0.0.0.$0.1.1.$row-" + str(t) + ".$td-9.1"}
-            dict_pts = {'data-reactid': id_class + ".2.0.0.0.0.$0.1.1.$row-" + str(t) + ".$td-10.1"}
-            #rank = t + 1
+            dict_t = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-1.0.0"}
+            dict_p = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-2.1"}
+            dict_w = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-3.1"}
+            dict_l = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-4.1"}
+            dict_d = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-5.1"}
+            dict_pd = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-8.1"}
+            dict_bp = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-9.1"}
+            dict_pts = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-10.1"}
             team = soup.find('span', dict_t).get_text()
             played = soup.find('span', dict_p).get_text()
             won = soup.find('span', dict_w).get_text()
@@ -90,50 +87,19 @@ def league_rip(league):
             rows.append([team, played, won, lost, drawn, pd, bp, points])
         df = pandas.DataFrame(rows, columns=['Team', 'Played', 'W', 'L', 'D', 'PD', 'BP', 'Points'])
         df.index += 1
-        wks_name = out_name
-        d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, row_names=True)
-        #with open(out_folder + out_name + ".csv",'w', newline='')  as f_output:
-        #    csv_output = csv.writer(f_output)
-        #    csv_output.writerows(rows)
-    elif conf >= 1:
-        for c in range(0,conf+1):
-            rows = []
-            #rows.append(['Rank', 'Team', 'Played', 'Won', 'Lost', 'Drawn', 'PD', 'BP', 'Points'])
-            for t in range(0,teams):
-                dict_t = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-1.0.0"}
-                dict_p = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-2.1"}
-                dict_w = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-3.1"}
-                dict_l = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-4.1"}
-                dict_d = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-5.1"}
-                dict_pd = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-8.1"}
-                dict_bp = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-9.1"}
-                dict_pts = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-10.1"}
-                #rank = t + 1
-                team = soup.find('span', dict_t).get_text()
-                played = soup.find('span', dict_p).get_text()
-                won = soup.find('span', dict_w).get_text()
-                lost = soup.find('span', dict_l).get_text()
-                drawn = soup.find('span', dict_d).get_text()
-                pd = soup.find('span', dict_pd).get_text()
-                bp = soup.find('span', dict_bp).get_text()
-                points = soup.find('span', dict_pts).get_text()
-                rows.append([team, played, won, lost, drawn, pd, bp, points])
-            df = pandas.DataFrame(rows, columns=['Team', 'Played', 'W', 'L', 'D', 'PD', 'BP', 'Points'])
-            df.index += 1
+        if conf == 0:
+            wks_name = out_name
+        else: 
             wks_name = out_name + "_" + str(c)
-            d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, row_names=True)
-            #with open(out_folder + out_name + "_" + str(c) + ".csv",'w', newline='')  as f_output:
-            #    csv_output = csv.writer(f_output)
-            #    csv_output.writerows(rows)
-    else:
-        pass
+        print(df)
+        d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, row_names=True)
 
 league_rip(l_ep)
 league_rip(l_t14)
 league_rip(l_p14)
 league_rip(l_champcup)
 league_rip(l_challengecup)
-league_rip(l_6n)
-league_rip(l_sr)
-league_rip(l_rwc)
+#league_rip(l_6n)
+#league_rip(l_sr)
+#league_rip(l_rwc)
 
