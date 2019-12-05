@@ -26,7 +26,7 @@ def league_rip(league):
     source = page.content.decode('ISO-8859-1')
     soup = bs(page.content, 'html.parser')
     z = re.search('data-reactid="(.*?)"', source)
-    id_class = z.group(0).strip()[14:-1]
+    id_class = z.group(0).strip()[14:-1] #workaround to get data-reactid of current page as it changes
     if league == l_ep:
         teams = 12
         out_name = "english_premiership"
@@ -66,7 +66,7 @@ def league_rip(league):
     else:
         pass
     for c in range(0,conf+1):
-        rows = []
+        l_table = []
         for t in range(0,teams):
             dict_t = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-1.0.0"}
             dict_p = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-2.1"}
@@ -84,8 +84,8 @@ def league_rip(league):
             pd = soup.find('span', dict_pd).get_text()
             bp = soup.find('span', dict_bp).get_text()
             points = soup.find('span', dict_pts).get_text()
-            rows.append([team, played, won, lost, drawn, pd, bp, points])
-        df = pandas.DataFrame(rows, columns=['Team', 'Played', 'W', 'L', 'D', 'PD', 'BP', 'Points'])
+            l_table.append([team, played, won, lost, drawn, pd, bp, points])
+        df = pandas.DataFrame(l_table, columns=['Team', 'Played', 'W', 'L', 'D', 'PD', 'BP', 'Points'])
         df.index += 1
         if conf == 0:
             wks_name = out_name
@@ -99,7 +99,7 @@ league_rip(l_t14)
 league_rip(l_p14)
 league_rip(l_champcup)
 league_rip(l_challengecup)
+league_rip(l_engchamp)
 #league_rip(l_6n)
 #league_rip(l_sr)
 #league_rip(l_rwc)
-
