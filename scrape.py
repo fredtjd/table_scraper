@@ -90,7 +90,7 @@ def league_rip(league):
         if conf == 0:
             wks_name = out_name
         else: 
-            wks_name = out_name + "_" + str(c + 1)
+            wks_name = out_name + "_" + chr(c + 97)
         print(df)
         d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, row_names=True)
 
