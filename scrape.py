@@ -39,7 +39,7 @@ def league_rip(league):
             l_table.append([team, played, won, lost, drawn, pd, bp, points])
         df = pandas.DataFrame(l_table, columns=['Team', 'Played', 'W', 'L', 'D', 'PD', 'BP', 'Points'])
         df.index += 1
-        if cfg[league]['pools'] == 0:
+        if cfg[league]['pools'] == 1:
             wks_name = cfg[league]['out_name']
         else: 
             wks_name = cfg[league]['out_name'] + "_" + chr(c + 97)
