@@ -1,0 +1,50 @@
+engprem:
+  url: "https://www.bbc.co.uk/sport/rugby-union/english-premiership/table"
+  teams: 12
+  pools: 1
+  out_name: "english_premiership"
+sixnations:
+  url: "https://www.bbc.co.uk/sport/rugby-union/six-nations/table"
+  teams: 6
+  pools: 1
+  out_name: "six_nations"
+top14:
+  url: "https://www.bbc.co.uk/sport/rugby-union/top-14/table"
+  teams: 14
+  pools: 1
+  out_name: "top_14"
+rugbychamp:
+  url: "https://www.bbc.co.uk/sport/rugby-union/rugby-championship/table"
+  teams: 4
+  pools: 1
+  out_name: "rugby_championship"
+pro14:
+  url: "https://www.bbc.co.uk/sport/rugby-union/pro-tournament/table"
+  teams: 7
+  pools: 2
+  out_name: "pro_14"
+superrugby:
+  url: "https://www.bbc.co.uk/sport/rugby-union/super-rugby/table"
+  teams: 5
+  pools: 3
+  out_name: "super_rugby"
+worldcup:
+  url: "https://www.bbc.co.uk/sport/rugby-union/world-cup/table"
+  teams: 5
+  pools: 4
+  out_name: "world_cup"
+champcup:
+  url: "https://www.bbc.co.uk/sport/rugby-union/european-cup/table"
+  teams: 4
+  pools: 4
+  out_name: "champions_cup"
+challengecup:
+  url: "https://www.bbc.co.uk/sport/rugby-union/european-challenge-cup/table"
+  teams: 4
+  pools: 4
+  out_name: "challenge_cup"
+engchamp:
+  url: "https://www.bbc.co.uk/sport/rugby-union/the-english-championship/table"
+  teams: 12
+  pools: 1
+  out_name: "english_championship"
