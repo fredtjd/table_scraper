@@ -92,7 +92,7 @@ def league_rip(league):
         else: 
             wks_name = out_name + "_" + chr(c + 97)
         print(df)
-        d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, row_names=True)
+        d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, clean=False)
 
 league_rip(l_ep)
 league_rip(l_t14)
@@ -100,6 +100,6 @@ league_rip(l_p14)
 league_rip(l_champcup)
 league_rip(l_challengecup)
 league_rip(l_engchamp)
-#league_rip(l_6n)
-#league_rip(l_sr)
-#league_rip(l_rwc)
+league_rip(l_6n)
+league_rip(l_sr)
+league_rip(l_rwc)
