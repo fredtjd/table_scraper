@@ -39,9 +39,9 @@ def league_rip(league):
                 dict_w = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) +  ".1.1.$row-" + str(t) + ".$td-3.1"}
                 dict_l = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) +  ".1.1.$row-" + str(t) + ".$td-4.1"}
                 dict_d = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) +  ".1.1.$row-" + str(t) + ".$td-5.1"}
-                dict_pd = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) +     ".1.1.$row-" + str(t) + ".$td-8.1"}
-                dict_bp = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) +     ".1.1.$row-" + str(t) + ".$td-9.1"}
-                dict_pts = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) +    ".1.1.$row-" + str(t) + ".$td-10.1"}
+                dict_pd = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-8.1"}
+                dict_bp = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-9.1"}
+                dict_pts = {'data-reactid': id_class + ".2.0.0.0.0.$" + str(c) + ".1.1.$row-" + str(t) + ".$td-10.1"}
                 team = soup.find('span', dict_t).get_text()
                 played = soup.find('span', dict_p).get_text()
                 won = soup.find('span', dict_w).get_text()
@@ -51,7 +51,7 @@ def league_rip(league):
                 bp = soup.find('span', dict_bp).get_text()
                 points = soup.find('span', dict_pts).get_text()
                 l_table.append([team, played, won, lost, drawn, pd, bp, points])
-            df = pandas.DataFrame(l_table, columns=['Team', 'Played', 'W', 'L',     'D', 'PD', 'BP', 'Points'])
+            df = pandas.DataFrame(l_table, columns=['Team', 'Played', 'W', 'L', 'D', 'PD', 'BP', 'Points'])
             df.index += 1
             print(df)
             d2g.upload(df, spreadsheet_key, wks_name, credentials=credentials, clean=False)
