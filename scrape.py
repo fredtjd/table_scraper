@@ -1,10 +1,10 @@
-import requests, csv, re, yaml, pandas, gspread, calendar, datetime
+import requests, csv, re, yaml, pandas, gspread, calendar, datetime, time
 from bs4 import BeautifulSoup as bs
 from oauth2client.service_account import ServiceAccountCredentials 
 from df2gspread import df2gspread as d2g
 
 with open("config.yaml", "r") as f:
-    cfg = yaml.load(f)
+    cfg = yaml.load(f, Loader=yaml.SafeLoader)
 
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 credentials = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
@@ -58,6 +58,7 @@ def league_rip(league):
             sht1.worksheet(wks_name).update_acell('L1', str(d_new.strftime("%d/%m/%Y")))
         else:
             print("Skipped " + wks_name)
+    time.sleep(10)
 
 league_rip("engprem")
 league_rip("top14")
@@ -67,5 +68,5 @@ league_rip("champcup")
 league_rip("challengecup")
 league_rip("engchamp")
 league_rip("superrugby")
-#league_rip("worldcup")
+league_rip("worldcup")
 league_rip("sixnations")
