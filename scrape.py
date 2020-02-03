@@ -1,9 +1,7 @@
-import requests, csv, re, yaml, pandas, gspread, calendar, datetime, time, os
+import requests, re, yaml, pandas, gspread, calendar, datetime, time, os
 from bs4 import BeautifulSoup as bs
-from oauth2client.service_account import ServiceAccountCredentials 
+from oauth2client.service_account import ServiceAccountCredentials
 from df2gspread import df2gspread as d2g
-
-config_file = os.path.join(os.path.dirname(__file__), 'config.yaml')
 
 with open(os.path.dirname(__file__) + '/config.yaml', "r") as f:
     cfg = yaml.load(f, Loader=yaml.SafeLoader)
