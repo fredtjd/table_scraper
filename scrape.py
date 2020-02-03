@@ -1,13 +1,15 @@
-import requests, csv, re, yaml, pandas, gspread, calendar, datetime, time
+import requests, csv, re, yaml, pandas, gspread, calendar, datetime, time, os
 from bs4 import BeautifulSoup as bs
 from oauth2client.service_account import ServiceAccountCredentials 
 from df2gspread import df2gspread as d2g
 
-with open("config.yaml", "r") as f:
+config_file = os.path.join(os.path.dirname(__file__), 'config.yaml')
+
+with open(os.path.dirname(__file__) + '/config.yaml', "r") as f:
     cfg = yaml.load(f, Loader=yaml.SafeLoader)
 
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-credentials = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scope)
+credentials = ServiceAccountCredentials.from_json_keyfile_name(os.path.dirname(__file__) + '/creds.json', scope)
 gc = gspread.authorize(credentials)
 spreadsheet_key = '1l7ZXUxE7Ebm433mRDeEM_h5afLkpFzM6W8nEnnc_520'
 
